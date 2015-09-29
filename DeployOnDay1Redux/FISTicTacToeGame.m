@@ -74,37 +74,33 @@
     }
 }
 
--(NSString *)winningPlayer
+-(NSString *)winningPlayer{
 
-    {
-    
-   
     for (NSUInteger i = 0 ; i < 3 ; i++) { // check row ->
 
-    if ([ [self playerAtColumn:0 row:i] isEqualToString:[self playerAtColumn:1 row:i]]  &&
-        [ [self playerAtColumn:2 row:i] isEqualToString:[self playerAtColumn:1 row:i]] &&
-        (![[self playerAtColumn:0 row:i] isEqualToString:@""])
-        ) {
+        if ([ [self playerAtColumn:0 row:i] isEqualToString:[self playerAtColumn:1 row:i]]  &&
+            [ [self playerAtColumn:2 row:i] isEqualToString:[self playerAtColumn:1 row:i]] &&
+            (![[self playerAtColumn:0 row:i] isEqualToString:@""])
+            ) {
 
-        NSString * sameValue = [self playerAtColumn:0 row:i];
-        NSLog(@"here");
-        return sameValue;
-        }
-
-    }
-    
-    for (NSUInteger i = 0 ; i < 3 ; i++) { // check colum ^
-            
-            if ([ [self playerAtColumn:i row:0] isEqualToString:[self playerAtColumn:i row:1]] &&
-                [ [self playerAtColumn:i row:2] isEqualToString:[self playerAtColumn:i row:1]] &&
-               (![[self playerAtColumn:i row:0] isEqualToString:@""])
-                ) {
-                
-                NSString * sameValue = [self playerAtColumn:i row:0];
-                NSLog(@"here2");
-                return sameValue;
+            NSString * sameValue = [self playerAtColumn:0 row:i];
+            NSLog(@"here");
+            return sameValue;
             }
+    
+        // check colum ^
+            
+        if ([ [self playerAtColumn:i row:0] isEqualToString:[self playerAtColumn:i row:1]] &&
+            [ [self playerAtColumn:i row:2] isEqualToString:[self playerAtColumn:i row:1]] &&
+           (![[self playerAtColumn:i row:0] isEqualToString:@""])
+            ) {
+            
+            NSString * sameValue = [self playerAtColumn:i row:0];
+            NSLog(@"here2");
+            return sameValue;
         }
+        
+     }
     
         // check cross x maybe look for simpler number pattern.
             
@@ -113,7 +109,7 @@
                 (![[self playerAtColumn:0 row:0] isEqualToString:@""])
                 ) {
                 
-                NSString * sameValue = [self playerAtColumn:0 row:0];
+            NSString * sameValue = [self playerAtColumn:0 row:0];
             NSLog(@"here3");
                 return sameValue;
             }
@@ -127,23 +123,20 @@
             NSLog(@"here4");
             return sameValue;
         }
-        
-        return @"";
-        NSLog(@"here5");
+          NSLog(@"here5");
+
+    
+         return @""; // this is not being called when NO ONE wins.
 
     }
 
 
--(BOOL)isADraw
+-(BOOL)isADraw // it seems like this method is called at the same time with winner....  if I want to do [self.board containsObject: @""].
 {
-//    if ([[self winningPlayer] isEqualToString:@"h"]){
-//        return NO;
-//        NSLog(@"NOTDRAWED");
-//   }
-//    //else return YES;
-//    NSLog(@"DRAWED");
-
-    //return NO;
+   if ([[self winningPlayer] isEqualToString:@""]){
+    NSLog(@"board = %@", self.board);
+    //return YES;
+   }else return NO;
 }
 
 @end
