@@ -126,17 +126,24 @@
           NSLog(@"here5");
 
     
-         return @""; // this is not being called when NO ONE wins.
-
+         return @""; 
     }
 
 
--(BOOL)isADraw // it seems like this method is called at the same time with winner....  if I want to do [self.board containsObject: @""].
+-(BOOL)isADraw
 {
-   if ([[self winningPlayer] isEqualToString:@""]){
-    NSLog(@"board = %@", self.board);
-    //return YES;
-   }else return NO;
+
+    //#---NOTE--| self.borad is a two level array, so it needs to be checked with a for loop. containsObject only check one level.
+    //#---NOTE--| Human think by the story, end of game, it does not have space. But it is more effecient to program in a computational narrative.
+    //#---NOTE--| which is two bunces of logic, contasin - therefore NOT, the rest is YES.
+    
+    for (NSArray * colum in self.board){
+        if ([colum containsObject:@""])
+            return NO;
+    }
+    
+    return YES;
+    
 }
 
 @end
